@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo Gogian Artur, group P3301, var \#5
+echo 1 - print working directory 
+echo 2 - list current directory contents 
+echo 3 - print current date and time
+echo 4 - display the contents of a file 
+echo 5 - remove file
+echo 6 - exit
+logifile=$HOME/lab1_err
+while true 
+do
+read x
+case $x in 
+	1)	pwd
+		#exit
+		;;
+	2)	ls 2>>$logifile || echo "error" >&2 
+		#exit
+		;;
+	3)	date +"%a %b %d %H:%M %Z %Y"
+		#exit
+		;;
+	4)	echo "enter filename:"
+		read filename
+		cat $filename 2>>$logifile || echo "error" >&2
+		#exit	
+		;;
+	5)	echo "enter filename:"
+		read filename
+		#rm -i $filename || echo "error" >&2
+		rm -i $filename 2>&1 | tee -a file
+		#exit
+		;;
+	6)	exit
+		;;
+	*)	echo "Invalid entry" >$logifile
+		#exit 1
+		;;
+esac
+done
